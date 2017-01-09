@@ -6,10 +6,11 @@ import java.util.List;
 
 import GUIPractice.components.Action;
 import GUIPractice.components.Button;
+import GUIPractice.ClickableScreen;
 import GUIPractice.components.TextLabel;
 import GUIPractice.components.Visible;
 
-public class SimonScreenKevin extends GUIPractice.ClickableScreen implements Runnable
+public class SimonScreenKevin extends ClickableScreen implements Runnable
 {
 	private ArrayList<MoveInterfaceKevin> sequence;
 	private ProgressInterfaceKevin progress;
@@ -186,15 +187,14 @@ public class SimonScreenKevin extends GUIPractice.ClickableScreen implements Run
 	}
 
 	@Override
-	public void initAllObjects(List<Visible> arg0) {
-		// TODO Auto-generated method stub
+	public void initAllObjects(List<Visible> arg0) 
+	{
 		
 	}
 
 	@Override
-	public void initObjects(ArrayList<Visible> arg0) {
-		// TODO Auto-generated method stub
+	public void initObjects(ArrayList<Visible> arg0) 
+	{
 		
 	}
-
 }
