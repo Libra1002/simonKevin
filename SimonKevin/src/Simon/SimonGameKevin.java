@@ -22,5 +22,4 @@ public class SimonGameKevin extends GUIApplication
 		SimonScreenKevin screen = new SimonScreenKevin(getWidth(),getHeight());
 		setScreen(screen);
 	}
-
 }
