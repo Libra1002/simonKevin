@@ -2,8 +2,8 @@ package Simon;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.List;
 
+import GUIPractice.components.Action;
 import GUIPractice.components.Button;
 import GUIPractice.components.TextLabel;
 import GUIPractice.components.Visible;
@@ -11,10 +11,11 @@ import GUIPractice.sampleGames.ClickableScreen;
 
 public class SimonScreenKevin extends ClickableScreen implements Runnable
 {
-	private TextLabel label;
 	private ArrayList<MoveInterfaceKevin> sequence;
 	private ProgressInterfaceKevin progress;
-	private ButtonInterfaceKevin button;
+	private TextLabel label;
+	private ButtonInterfaceKevin[] button;
+	
 	private int roundNumber;
 	private boolean acceptingInput;
 	private int sequenceIndex;
@@ -30,11 +31,66 @@ public class SimonScreenKevin extends ClickableScreen implements Runnable
 	@Override
 	public void run() 
 	{
-		
+		changeText("");
+		nextRound();
 	}
 
+	private void nextRound() 
+	{
+		acceptingInput = false;
+		roundNumber++;
+		progress.setRound(roundNumber);
+		sequence.add(randomMove());
+		progress.setSequenceSize(sequence.size());
+		changeText("Simon's turn.");
+		label.setText("");
+		playSequence();
+		changeText("Your turn.");
+		label.setText("");
+		acceptingInput = true;
+		sequenceIndex = 0;
+	}
+
+	private void playSequence() 
+	{
+		ButtonInterfaceKevin b = null;
+		for(MoveInterfaceKevin m: sequence)
+		{
+			if(b!=null)
+			{		
+				b.dim();
+			}
+			b = m.getButton();
+			b.highlight();
+			try 
+			{
+				Thread.sleep((long)(2000*(2.0/(roundNumber + 2))));
+			} 
+			catch (InterruptedException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+		b.dim();
+	}
+
+	private void changeText(String string) 
+	{
+		try
+		{
+			label.setText(string);
+			Thread.sleep(1000);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	
+	}
+
+	
 	@Override
-	public void initAllObjects(List<Visible> viewObjects) 
+	public void initAllObjects(ArrayList<Visible> viewObjects) 
 	{
 		addButtons();
 		progress = getProgress();
@@ -52,12 +108,18 @@ public class SimonScreenKevin extends ClickableScreen implements Runnable
 	private MoveInterfaceKevin randomMove() 
 	{
 		ButtonInterfaceKevin b;
-		int selectedButton = (int)(Math.random()*buttons.length);
+		int selectedButton = (int)(Math.random()*button.length);
 		while (selectedButton == lastSelectedButton)
 		{
-			selectedButton = (int)(Math.random()*buttons.length);
+			selectedButton = (int)(Math.random()*button.length);
 		}
+		b = button[selectedButton];
 		lastSelectedButton = selectedButton;
+		return getMove(b);
+	}
+
+	private MoveInterfaceKevin getMove(ButtonInterfaceKevin b)
+	{
 		return null;
 	}
 
@@ -75,20 +137,54 @@ public class SimonScreenKevin extends ClickableScreen implements Runnable
 		{
 			ButtonInterfaceKevin b = getAButton();
 			b.setColor(colors[i]);
-			
-		}
+			b.setX(160 + (int)(100*Math.cos(i*2*Math.PI/(numberOfButtons))));
+			b.setY(200 - (int)(100*Math.sin(i*2*Math.PI/(numberOfButtons))));
+			b.setAction(new Action()
+			{
+				public void act()
+				{
+					if(acceptingInput)
+					{
+					    Thread blink = new Thread(new Runnable()
+					    {
+					        public void run()
+					        {
+					        	b.highlight();
+					        	try
+					        	{
+					        		Thread.sleep(800);
+					        		b.dim();
+					        	}
+					        	catch(InterruptedException e)
+					        	{
+					        		e.printStackTrace();
+					        	}
+					        }
+					    });
+					    blink.start();
+					    if(b == sequence.get(sequenceIndex).getButton())
+					    {
+					    	sequenceIndex++;
+					    }
+					    else
+					    {
+					    	progress.gameOver();
+					    }
+					    if(sequenceIndex == sequence.size())
+					    {
+					    	Thread nextRound = new Thread(SimonScreenKevin.this);
+					    	nextRound.start();
+					    }
+					}
+				}
+			});
+			viewObjects.add(b);
+		};
 	}
-
+	
 	private ButtonInterfaceKevin getAButton() 
 	{
-		
 		return null;
-	}
-
-	@Override
-	public void initObjects(ArrayList<Visible> viewObjects) 
-	{
-		
 	}
 
 }
