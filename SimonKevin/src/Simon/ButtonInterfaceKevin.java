@@ -2,6 +2,7 @@ package Simon;
 
 import java.awt.Color;
 
+import GUIPractice.components.Action;
 import GUIPractice.components.Clickable;
 
 public interface ButtonInterfaceKevin extends Clickable

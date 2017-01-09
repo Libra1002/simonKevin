@@ -2,14 +2,14 @@ package Simon;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 
 import GUIPractice.components.Action;
 import GUIPractice.components.Button;
 import GUIPractice.components.TextLabel;
 import GUIPractice.components.Visible;
-import GUIPractice.sampleGames.ClickableScreen;
 
-public class SimonScreenKevin extends ClickableScreen implements Runnable
+public class SimonScreenKevin extends GUIPractice.ClickableScreen implements Runnable
 {
 	private ArrayList<MoveInterfaceKevin> sequence;
 	private ProgressInterfaceKevin progress;
@@ -88,8 +88,6 @@ public class SimonScreenKevin extends ClickableScreen implements Runnable
 	
 	}
 
-	
-	@Override
 	public void initAllObjects(ArrayList<Visible> viewObjects) 
 	{
 		addButtons();
@@ -185,6 +183,18 @@ public class SimonScreenKevin extends ClickableScreen implements Runnable
 	private ButtonInterfaceKevin getAButton() 
 	{
 		return null;
+	}
+
+	@Override
+	public void initAllObjects(List<Visible> arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void initObjects(ArrayList<Visible> arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
