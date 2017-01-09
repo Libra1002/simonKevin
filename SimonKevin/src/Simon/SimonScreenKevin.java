@@ -88,7 +88,7 @@ public class SimonScreenKevin extends ClickableScreen implements Runnable
 		}
 	
 	}
-
+	
 	public void initAllObjects(ArrayList<Visible> viewObjects) 
 	{
 		addButtons(viewObjects);
