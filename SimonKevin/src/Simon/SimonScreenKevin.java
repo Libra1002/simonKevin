@@ -119,13 +119,13 @@ public class SimonScreenKevin extends ClickableScreen implements Runnable
 
 	private MoveInterfaceKevin getMove(ButtonInterfaceKevin b)
 	{
-		return null;
+		return new Move(b);
 	}
 
 	private ProgressInterfaceKevin getProgress() 
 	{
 		//Placeholder until partner finishes implementation of ProgressInterface
-		return null;
+		return new Progress();
 	}
 
 	private void addButtons(ArrayList<Visible> viewObjects) 
@@ -183,7 +183,7 @@ public class SimonScreenKevin extends ClickableScreen implements Runnable
 	
 	private ButtonInterfaceKevin getAButton() 
 	{
-		return null;
+		return new ButtonKevin();
 	}
 
 	@Override
