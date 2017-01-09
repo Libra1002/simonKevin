@@ -91,7 +91,7 @@ public class SimonScreenKevin extends ClickableScreen implements Runnable
 
 	public void initAllObjects(ArrayList<Visible> viewObjects) 
 	{
-		addButtons();
+		addButtons(viewObjects);
 		progress = getProgress();
 		label = new TextLabel(130,230,300,40,"Let's play Simon!");
 		sequence = new ArrayList<MoveInterfaceKevin>();
@@ -128,7 +128,7 @@ public class SimonScreenKevin extends ClickableScreen implements Runnable
 		return null;
 	}
 
-	private void addButtons() 
+	private void addButtons(ArrayList<Visible> viewObjects) 
 	{
 		int numberOfButtons = 6;
 		Color[] colors = {Color.red,Color.magenta,Color.blue,Color.green,Color.yellow,Color.orange};

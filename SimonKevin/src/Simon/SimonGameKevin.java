@@ -7,19 +7,20 @@ public class SimonGameKevin extends GUIApplication
 
 	public SimonGameKevin() 
 	{
+		super();
 	}
 	
 	public static void main(String[] args) 
 	{
-		SimonScreenKevin ssK = new SimonScreenKevin(getWidth(),getHeight());
-		setScreen(ssK);
+		SimonGameKevin ssK = new SimonGameKevin();
+		Thread app = new Thread(ssK);
+		app.start();
 	}
 	
 	protected void initScreen() 
 	{
-		SimonGameKevin game = new SimonGameKevin();
-		Thread app = new Thread(game);
-		app.start();
+		SimonScreenKevin screen = new SimonScreenKevin(getWidth(),getHeight());
+		setScreen(screen);
 	}
 
 }
