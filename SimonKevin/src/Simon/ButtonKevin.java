@@ -9,7 +9,8 @@ import java.awt.image.BufferedImage;
 import GUIPractice.components.Action;
 import GUIPractice.components.Component;
 
-public class ButtonKevin extends Component implements ButtonInterfaceKevin {
+public class ButtonKevin extends Component implements ButtonInterfaceKevin 
+{
 
 	private static final int WIDTH = 50;
 	private static final int HEIGHT = 50;
@@ -18,114 +19,61 @@ public class ButtonKevin extends Component implements ButtonInterfaceKevin {
 	private Color displayColor;
 	private boolean highlight;
 	
-	public ButtonKevin() {
-		super(0,0,WIDTH, HEIGHT);
+	public ButtonKevin() 
+	{
+		super(0,0,WIDTH,HEIGHT);
 	}
 
-	@Override
-	public void act() {
-		action.act();
-
-	}
-
-	@Override
-	public boolean isHovered(int x, int y) {
+	public boolean isHovered(int x, int y) 
+	{
 		double distance = Math.sqrt(Math.pow(x-(getX()+WIDTH/2), 2)+Math.pow(y-(getY()+HEIGHT/2), 2));
-		//		System.out.println(distance + " px away from "+name);
 		return distance < WIDTH/2;
 	}
 
-	@Override
-	public int getHeight() {
-		// TODO Auto-generated method stub
-		return 0;
+	public void act() 
+	{
+		action.act();
 	}
 
-	@Override
-	public BufferedImage getImage() {
-		// TODO Auto-generated method stub
-		return null;
+
+
+	public void setColor(Color color) 
+	{
+		this.c = color;
+		displayColor = c;
+		update();
 	}
 
-	@Override
-	public int getWidth() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getX() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getY() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public boolean isAnimated() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setColor(Color color) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setX(int i) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setY(int i) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setAction(Action action) {
-		this.action = action;
-
-	}
-
-	@Override
-	public void highlight() {
+	public void highlight() 
+	{
 		if(c != null) displayColor = c;
 		highlight = true;
 		update();
-
 	}
 
-	@Override
-	public void dim() {
+	public void dim() 
+	{
 		displayColor = Color.gray;
 		highlight = false;
 		update();
+	}
 
+	public void setAction(Action action) 
+	{
+		this.action = action;
 	}
 
 	@Override
-	public void update(Graphics2D g) {
+	public void update(Graphics2D g) 
+	{
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		if(displayColor != null) g.setColor(displayColor);
 		else g.setColor(Color.gray);
 		g.fillOval(0, 0, WIDTH, HEIGHT);
 		g.setColor(Color.black);
 		g.drawOval(0, 0, WIDTH-1, HEIGHT-1);
-		if(highlight){
+		if(highlight)
+		{
 			g.setColor(Color.white);
 			Polygon p = new Polygon();
 			
@@ -138,8 +86,20 @@ public class ButtonKevin extends Component implements ButtonInterfaceKevin {
 			p.addPoint(s+12, t+14);
 			p.addPoint(s+8, t+3);
 			g.fill(p);
+		}
 		
 	}
 
-}
+	
+	private String name;
+	public void setName(String s)
+	{
+		this.name = s;
+	}
+	
+	public String toString()
+	{
+		return name;
+	}
+	
 }

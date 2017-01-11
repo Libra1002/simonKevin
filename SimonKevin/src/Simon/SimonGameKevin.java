@@ -12,8 +12,8 @@ public class SimonGameKevin extends GUIApplication
 	
 	public static void main(String[] args) 
 	{
-		SimonGameKevin ssK = new SimonGameKevin();
-		Thread app = new Thread(ssK);
+		SimonGameKevin SGK = new SimonGameKevin();
+		Thread app = new Thread(SGK);
 		app.start();
 	}
 	
