@@ -29,15 +29,15 @@ public class SimonScreenKevin extends ClickableScreen implements Runnable{
 	@Override
 	public void initAllObjects(List<Visible> viewObjects) {
 		Color[] colors = {Color.red, Color.blue, new Color(240,160,70), new Color(20,255,140), Color.yellow, new Color(180,90,210)};
-		String[] names = {"RED", "BLUE", "ORANGE", "GREEN", "YELLOW", "PURPLE"};
+		String[] names = {"RED", "PURPLE", "BLUE", "GREEN", "YELLOW", "ORANGE"};
 		int buttonCount = 6;
 		buttons = new ButtonInterfaceKevin[buttonCount];
 		for(int i = 0; i < buttonCount; i++ ){
 			buttons[i] = getAButton();
 			buttons[i].setName(names[i]);
 			buttons[i].setColor(colors[i]);
-			buttons[i].setX(160 + (int)(100*Math.cos(i*2*Math.PI/(buttonCount))));
-			buttons[i].setY(200 - (int)(100*Math.sin(i*2*Math.PI/(buttonCount))));
+			buttons[i].setX(90+(int)(75*i));
+			buttons[i].setY(200);
 			final ButtonInterfaceKevin b = buttons[i];
 			System.out.println(b+" has x = "+b.getX()+", y ="+b.getY());
 			b.dim();
@@ -79,7 +79,6 @@ public class SimonScreenKevin extends ClickableScreen implements Runnable{
 		progress = getProgress();
 		label = new TextLabel(130,230,300,40,"Let's play Simon!");
 		sequence = new ArrayList<MoveInterfaceKevin>();
-		//add 2 moves to start
 		lastSelected = -1;
 		sequence.add(randomMove());
 		sequence.add(randomMove());
