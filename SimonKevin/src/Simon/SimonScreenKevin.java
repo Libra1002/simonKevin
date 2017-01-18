@@ -38,17 +38,17 @@ public class SimonScreenKevin extends ClickableScreen implements Runnable
 			buttons[i] = getAButton();
 			buttons[i].setName(names[i]);
 			buttons[i].setColor(colors[i]);
-			buttons[i].setX(90+(int)(75*i));
-			buttons[i].setY(200);
+			buttons[i].setY(90+(int)(50*i));
+			buttons[i].setX(200);
 			final ButtonInterfaceKevin b = buttons[i];
 			System.out.println(b+" has x = "+b.getX()+", y ="+b.getY());
 			b.dim();
-			buttons[i].setAction(new Action() 
+			b.setAction(new Action() 		
 			{
-
 				public void act() 
 				{
-
+					if(acceptingInput)
+					{
 						Thread buttonPress = new Thread(new Runnable() 
 						{
 							
@@ -64,9 +64,12 @@ public class SimonScreenKevin extends ClickableScreen implements Runnable
 									e.printStackTrace();
 								}
 								b.dim();
+							
 								
 							}
+						
 						});
+					
 						buttonPress.start();
 						if(acceptingInput && sequence.get(sequenceIndex).getButton() == b)
 						{
@@ -84,7 +87,7 @@ public class SimonScreenKevin extends ClickableScreen implements Runnable
 							nextRound.start();
 						}
 					}
-
+				}
 			});
 			viewObjects.add(buttons[i]);
 		}

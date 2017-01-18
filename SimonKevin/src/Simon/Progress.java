@@ -20,6 +20,8 @@ public class Progress extends Component implements ProgressInterfaceKevin
 	public Progress() 
 	{
 		super(60,60,WIDTH,HEIGHT);
+		round = "round 0";
+		sequence = "sequence length 0";
 	}
 
 
@@ -56,7 +58,11 @@ public class Progress extends Component implements ProgressInterfaceKevin
 			g.setColor(Color.white);
 			String go = "GAME OVER!";
 			g.drawString(go, (WIDTH - fm.stringWidth(go))/2, 20);
-			g.drawString(sequence, (WIDTH - fm.stringWidth(sequence))/2, 40);
+			if(sequence != null)
+			{
+				g.drawString(sequence, (WIDTH - fm.stringWidth(sequence))/2, 40);
+			}
+			
 
 		}else
 		{
@@ -66,7 +72,6 @@ public class Progress extends Component implements ProgressInterfaceKevin
 			g.drawRect(0, 0, WIDTH-1, HEIGHT-1);
 			if(round !=null && sequence != null)
 			{
-
 				g.drawString(round, (WIDTH - fm.stringWidth(round))/2, 20);
 				g.drawString(sequence, (WIDTH - fm.stringWidth(sequence))/2, 40);
 			}
@@ -78,8 +83,8 @@ public class Progress extends Component implements ProgressInterfaceKevin
 	@Override
 	public void setSequenceSize(int size) 
 	{
-		// TODO Auto-generated method stub
-		
+		sequence = "Sequence length "+size;
+		update();
 	}
 
 }
